@@ -7,7 +7,7 @@
 :set softtabstop=4
 :set mouse=a
 
-call plug#begin()
+call plug#begin('/home/seb/.config/nvim/plugged')
 
 Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
 Plug 'https://github.com/preservim/nerdtree' " NerdTree
@@ -22,6 +22,7 @@ Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
 Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'https://github.com/vim-syntastic/syntastic'	"Syntax error
 Plug 'https://github.com/morhetz/gruvbox' "Gruvbox
+Plug 'https://github.com/neoclide/coc.nvim' "Autocomplete
 set encoding=UTF-8
 
 call plug#end()
@@ -34,47 +35,33 @@ nmap <C-r> :TagbarToggle<CR>
 
 :set completeopt-=preview " For No Previews
 
-"GRUVBOX COLORSCHEME
-:set bg=dark
-let g:gruvbox_bold = '1'					"Enables bold text.
-let g:gruvbox_italic = '1'					"Enables italic text.
-let g:gruvbox_underline = '1'				"Enables underlined text.
-let g:gruvbox_undercurl = '1'				"Enables undercurled text.
-let g:gruvbox_termcolors = '256'			"Uses 256-color palette
-let g:gruvbox_contrast_dark = 'hard'		"contrast
-let g:gruvbox_sign_column = 'bg1'			"changes sign column background color
-let g:gruvbox_color_column = 'bg1'			"Changes color column background color.
-let g:gruvbox_italicize_comments = '1'		"Enables italic for comments.
-colorscheme gruvbox
+"colorscheme jellybeans
 
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
 
+" --- Just Some Notes ---
+" :PlugClean :PlugInstall :UpdateRemotePlugins
+"
+" :CocInstall coc-python
+" :CocInstall coc-clangd
+" :CocInstall coc-snippets
+" :CocCommand snippets.edit... FOR EACH FILE TYPE
+
 " air-line
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
-     let g:airline_symbols = {}
-     endif
+    let g:airline_symbols = {}
+endif
 
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.maxlinenr = '☰'
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_theme='gruvbox'
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
+inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
