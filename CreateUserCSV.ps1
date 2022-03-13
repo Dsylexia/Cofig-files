@@ -1,35 +1,6 @@
-# Usage:
-# .\CreateUserCSV.ps1
-# will create the csv-file which can be used like this (if sec.core domain prepared):
-# $ADUsers = Import-Csv seccoreusers.csv -Delimiter ";"
-# # Headers: Username;GivenName;SurName;UserPrincipalName;DisplayName;Password;Department;Path
-# foreach ($User in $ADUsers) {
-#     New-ADUser `
-#     -SamAccountName        $User.Username `
-#     -UserPrincipalName     $User.UserPrincipalName `
-#     -Name                  $User.DisplayName `
-#     -GivenName             $User.GivenName `
-#     -Surname               $User.SurName `
-#     -Enabled               $True `
-#     -ChangePasswordAtLogon $False `
-#     -DisplayName           $user.Displayname `
-#     -Department            $user.Department `
-#     -Path                  $user.path `
-#     -AccountPassword (ConvertTo-SecureString $user.Password -AsPlainText -Force)
-# }
-# Note: might get "The password does not meet the length, complexity, or
-# history requirement of the domain." due to bad default password policy
 
-# Run this script to create your own list of 100 users for the WallE.IT
-# infrastructure as a CSV-file
-# Each time the script is run, it will create a new random combination
-# of firstname (which is also the username), lastname and department
-# New unique random passwords are generated for every user
-
-# Test so we don't overwrite a file by accident
-#
 if ((Get-ChildItem -ErrorAction SilentlyContinue walleitusers.csv).Exists)
-  {"You already have the file seccoreusers.csv!"; return;}
+  {"You already have the file walleitusers.csv!"; return;}
   
 
 # 100 unique firstnames without norwegian characters ('øæå')
@@ -132,7 +103,7 @@ $fnidx = 0..99 | Get-Random -Shuffle
 $lnidx = 0..99 | Get-Random -Shuffle
 $ouidx = 0..99 | Get-Random -Shuffle
 
-Write-Output "UserName;GivenName;SurName;UserPrincipalName;DisplayName;Password;Department;Path" > seccoreusers.csv
+Write-Output "UserName;GivenName;SurName;UserPrincipalName;DisplayName;Password;Department;Path" > walleitusers.csv
 
 foreach ($i in 0..99) {
   $UserName          = $FirstName[$fnidx[$i]].ToLower()
