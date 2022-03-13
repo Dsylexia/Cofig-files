@@ -111,7 +111,7 @@ foreach ($i in 0..99) {
   $SurName           = $LastName[$lnidx[$i]]
   $UserPrincipalName = $UserName + '@' + 'WallE.IT'
   $DisplayName       = $GivenName + ' ' + $SurName
-  $Password 	     =  -join ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ0123456789!"#$%&()*+,-./:<=>?@[\]_{|}'.ToCharArray() | Get-Random -Count 16)
+  $Password 	     =  -join ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ0123456789!"#$%&()*+,-./:<=>?@[\]_{|}'.ToCharArray() | Get-Random -Count 20)
       
   
   $Department        = ($OrgUnits[$ouidx[$i]] -split '[=,]')[1]
